@@ -20,8 +20,11 @@ RUN cmake -DUSE_QT=OFF -DCMAKE_INSTALL_PREFIX=/usr -DSYSCONF_INSTALL_DIR=/etc -D
 RUN make -j3
 
 # The 'make install' will do a chown so we need the user before doing the installation.
-RUN useradd -s /bin/bash -rG audio,plugdev,gpio,dialout svxlink && \
-    make  install
+# The gpio group does not exist in the generic Docker --- hmmm can't do that bit
+# Never worked with a GPIO before, so hopefully I can use it in a Docker.
+RUN useradd -s /bin/bash -rG audio,plugdev,dialout svxlink
+#RUN useradd -s /bin/bash -rG audio,plugdev,gpio,dialout svxlink
+RUN make  install
 
 EXPOSE 5198
 EXPOSE 5199
@@ -29,8 +32,9 @@ EXPOSE 5200
 
 # Install audio files
 WORKDIR /usr/share/svxlink/sounds
-RUN curl -LO https://github.com/sm0svx/svxlink-sounds-en_US-heather/releases/download/19.09.99.1/svxlink-sounds-en_US-heather-16k-19.09.99.1.tar.bz2 && \
-    tar xvaf svxlink-sounds-* && \
+RUN curl -LO https://github.com/sm0svx/svxlink-sounds-en_US-heather/releases/download/19.09/svxlink-sounds-en_US-heather-16k-19.09.tar.bz2
+
+RUN tar xvjf svxlink-sounds-en_US-heather-16k-19.09.tar.bz2 && \
     ln -s en_US-heather-16k en_US
     
 WORKDIR /home/svxlink
