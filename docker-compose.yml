@@ -12,9 +12,9 @@ services:
       - 5198:5198/udp
       - 5199:5199/udp
       - 5200:5200/tcp
-#    environment:
+    environment:
 #      - GIT_BRANCH=master # To build another branch than master
-#      - NUM_CORES=8 # To use more than one CPU core when compiling
+      - NUM_CORES=4 # To use more than one CPU core when compiling
 #      - GIT_URL=username@your.repo:/path/to/svxlink.git # To use a specific git repositoty instead of the default one
     volumes:
       - ./config/svxlink.conf:/etc/svxlink/svxlink.conf:ro

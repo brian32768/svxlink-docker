@@ -17,16 +17,18 @@ if [ -n "$HOSTAUDIO_GID" ]; then
   usermod -G $HOSTAUDIO_GID svxlink
 fi
 
-# Set up the sudo command line
-SUDO_CMD="sudo -u svxlink "
-SUDO_CMD+="PATH=$PATH:/usr/lib64/qt4/bin "
-SUDO_CMD+="GIT_URL=$GIT_URL "
-SUDO_CMD+="GIT_BRANCH=$GIT_BRANCH "
-SUDO_CMD+="NUM_CORES=$NUM_CORES "
+# Set up the command line
+CMD="svxlink "
+#CMD+="PATH=$PATH:/usr/lib64/qt4/bin "
+#CMD+="GIT_URL=$GIT_URL "
+#CMD+="GIT_BRANCH=$GIT_BRANCH "
+CMD+="NUM_CORES=$NUM_CORES "
+
+echo The command is: $CMD
 
 # If an argument is specified, run it as a command or else just start a shell
 if [ $# -gt 0 ]; then
-  exec $SUDO_CMD "$@"
+  exec $CMD "$@"
 else
-  exec $SUDO_CMD -i
+  exec $CMD -i
 fi

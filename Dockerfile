@@ -38,9 +38,8 @@ RUN tar xvjf svxlink-sounds-en_US-heather-16k-19.09.tar.bz2 && \
     ln -s en_US-heather-16k en_US
     
 WORKDIR /home/svxlink
-ADD entrypoint.sh /
+ADD entrypoint.sh .
 
-USER svxlink
-#ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/home/svxlink/entrypoint.sh"]
 
 #CMD screen -dmS "svxlink" svxlink && screen -x svxlink
