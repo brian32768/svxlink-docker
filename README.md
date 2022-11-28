@@ -2,7 +2,13 @@
 
 SvxLink is a project that develops software targeting the ham radio community. It started out as an EchoLink application for Linux back in 2003 but has now evolved to be something much more advanced.
 
-** My fork is optimized for Pi 4, but it should run on any Debian Linux. -- brian32768 **
+## About this fork
+
+The original version was 5 years old so it was very out of date.
+I took the build information from the main project and grafted onto this one.
+My fork is optimized for Pi 4, but it should run on any Debian Linux. 
+
+-- brian32768 **
 
 ## To do
 

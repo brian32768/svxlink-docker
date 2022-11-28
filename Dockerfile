@@ -14,9 +14,13 @@ RUN apt-get -y install alsa-utils vorbis-tools curl
 
 WORKDIR /home/svxlink
 RUN git clone https://github.com/sm0svx/svxlink.git
+
 WORKDIR /home/svxlink/svxlink/src/build
 RUN cmake -DUSE_QT=OFF -DCMAKE_INSTALL_PREFIX=/usr -DSYSCONF_INSTALL_DIR=/etc -DLOCAL_STATE_DIR=/var -DWITH_SYSTEMD=ON ..
-RUN make -j3 && \
+RUN make -j3
+
+# The 'make install' will do a chown so we need the user before doing the installation.
+RUN useradd -s /bin/bash -rG audio,plugdev,gpio,dialout svxlink && \
     make  install
 
 EXPOSE 5198
@@ -32,7 +36,6 @@ RUN curl -LO https://github.com/sm0svx/svxlink-sounds-en_US-heather/releases/dow
 WORKDIR /home/svxlink
 ADD entrypoint.sh /
 
-RUN useradd -s /bin/bash -rG audio,plugdev,gpio,dialout svxlink
 USER svxlink
 #ENTRYPOINT ["/entrypoint.sh"]
 
