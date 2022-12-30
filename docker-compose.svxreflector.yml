@@ -11,13 +11,10 @@ services:
     ports:
       - 5300:5300
     environment:
-#      - GIT_BRANCH=master # To build another branch than master
+#     - GIT_BRANCH=master # To build another branch than master
       - NUM_CORES=4 # To use more than one CPU core when compiling
-#      - GIT_URL=username@your.repo:/path/to/svxlink.git # To use a specific git repositoty instead of the default one
+#     - GIT_URL=username@your.repo:/path/to/svxlink.git # To use a specific git repositoty instead of the default one
     volumes:
-      - ./config/svxreflector.conf:/etc/svxlink/svxreflector.conf:ro
-      - ./config/secrets.conf:/etc/svxlink/svxreflector.d/secrets.conf:ro
-      - ./config/config.d:/etc/svxlink/svxlink.d:ro
-#      - ./config/sounds:/usr/share/svxlink/sounds:ro
-#      - ${HOME}/.gitconfig:/home/svxlink/.gitconfig:ro # To import your git config add (mileage may vary)
+      - $PWD/config/svxreflector.conf:/etc/svxlink/svxreflector.conf:ro
+      - $PWD/config/svxlink.d:/etc/svxlink/svxlink.d:ro
     restart: unless-stopped
