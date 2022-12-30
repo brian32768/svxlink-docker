@@ -1,6 +1,11 @@
 # svxlink-docker
 
-SvxLink is a project that develops software targeting the ham radio community. It started out as an EchoLink application for Linux back in 2003 but has now evolved to be something much more advanced.
+SvxLink is a project that develops software targeting the ham radio
+community. It started out as an EchoLink application for Linux back in
+2003 but has now evolved to be something much more advanced.
+
+This project builds svxlink in a docker container; that includes
+svxreflector. It will work on either a x64 system or a Raspberry Pi.
 
 ## About this fork
 
@@ -23,15 +28,17 @@ Can I run in Alpine instead of Debian?
 $ apt-get install docker docker-compose
 ```
 
-## Build and Run svxlink
+## Build and Run svxlink on a Raspberry Pi
 
-Edit docker-compose.yml, 
+(Taths; how I do it anyway.)
+
+Edit docker-compose.svxlink.yml, 
 build an image, 
 and run it.
 
 ```console
-$ docker-compose build
-$ docker-compose up -d
+$ docker-compose --file=docker-compose.svxlink.yml build
+$ docker-compose --file=docker-compose.svxlink.yml up -d
 ```
 
 I need to test so I also can run like this,
@@ -44,8 +51,9 @@ docker run -it --name=svxlink \
 
 ## Volumes
 
-- `./config/svxlink.conf:/etc/svxlink/svxlink.conf` Path to the svxlink.conf File
-- `./config/ModuleEchoLink.conf:/etc/svxlink/svxlink.d/ModuleEchoLink.conf` Path to the ModuleEchoLink.conf File
+- `./config/svxlink.conf:/etc/svxlink/svxlink.conf` Path to the svxlink.conf file, for the svxlink only
+- `./config/svxreflector.conf:/etc/svxlink/svxreflector.conf` Path to the svxreflector.conf file, for the reflector only
+- `./config/ModuleEchoLink.conf:/etc/svxlink/svxlink.d/ModuleEchoLink.conf` Path to the ModuleEchoLink.conf File, only needed by svxlink.
 
 ## Run console svxlink
 ```console
