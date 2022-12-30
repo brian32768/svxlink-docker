@@ -32,13 +32,13 @@ $ sudo apt install docker docker-compose
 
 (Taths; how I do it anyway.)
 
-Edit docker-compose.svxlink.yml, 
-build an image, 
+Edit docker-compose.yml
+build an image
 and run it.
 
 ```console
-$ docker-compose --file=docker-compose.svxlink.yml build
-$ docker-compose --file=docker-compose.svxlink.yml up -d
+$ docker-compose build
+$ docker-compose up -d
 ```
 
 I need to test so I also can run like this,
