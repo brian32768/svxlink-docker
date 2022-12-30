@@ -21,6 +21,7 @@ services:
 #      - GIT_URL=username@your.repo:/path/to/svxlink.git # To use a specific git repo for svxlink instead of the default one
     volumes:
       - ./config/svxlink.conf:/etc/svxlink/svxlink.conf:ro
+      - ./config/secrets.conf:/etc/svxlink/svxlink.d/secrets.conf:ro
       - ./config/ModuleEchoLink.conf:/etc/svxlink/svxlink.d/ModuleEchoLink.conf:ro
 #      - ./config/sounds:/usr/share/svxlink/sounds:ro
 #      - ${HOME}/.gitconfig:/home/svxlink/.gitconfig:ro # To import your git config add (mileage may vary)

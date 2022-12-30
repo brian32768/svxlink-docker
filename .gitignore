@@ -1,0 +1,4 @@
+svxlink.d/secrets.conf
+.env
+*~
+svxlink.docker
