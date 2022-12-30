@@ -12,7 +12,7 @@ My fork is optimized for Pi 4, but it should run on any Debian Linux.
 
 ## To do
 
-Make the build into stage one and
+Make the build in stage 1 and
 run in stage 2 to reduce image size
 
 Can I run in Alpine instead of Debian?
@@ -32,6 +32,14 @@ and run it.
 ```console
 $ docker-compose build
 $ docker-compose up -d
+```
+
+I need to test so I also can run like this,
+
+```bash
+docker run -it --name=svxlink \
+  -v `pwd`/config/svxlink.conf:/etc/svxlink/svxlink.conf \
+  svxlink:latest bash
 ```
 
 ## Volumes
