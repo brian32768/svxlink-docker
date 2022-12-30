@@ -1,4 +1,4 @@
-svxlink.d/secrets.conf
+config/secrets.conf
 .env
 *~
 svxlink.docker
