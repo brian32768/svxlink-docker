@@ -25,7 +25,7 @@ Can I run in Alpine instead of Debian?
 ## Install Docker and Docker Compose
 
 ```console
-$ apt-get install docker docker-compose
+$ sudo apt install docker docker-compose
 ```
 
 ## Build and Run svxlink on a Raspberry Pi
@@ -66,35 +66,23 @@ $ docker-compose build --no-cache
 $ docker-compose up -d
 ```
 
-## A basic docker-compose.yml file
+## SVXreflector
 
-```yml
-version: '3'
-services:
-  svxlink:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    tty: true
-    stdin_open: true
-    container_name: svxlink
-    ports:
-      - 5198:5198/udp
-      - 5199:5199/udp
-      - 5200:5200/tcp
-#    environment:
-#      - GIT_BRANCH=master # To build another branch than master
-#      - NUM_CORES=8 # To use more than one CPU core when compiling
-#      - GIT_URL=username@your.repo:/path/to/svxlink.git # To use a specific git repositoty instead of the default one
-    volumes:
-      - ./config/svxlink.conf:/etc/svxlink/svxlink.conf:ro
-      - ./config/ModuleEchoLink.conf:/etc/svxlink/svxlink.d/ModuleEchoLink.conf:ro
-#      - ./config/sounds:/usr/share/svxlink/sounds:ro
-#      - ${HOME}/.gitconfig:/home/svxlink/.gitconfig:ro # To import your git config add (mileage may vary)
-    devices:
-      - /dev/snd:/dev/snd
-      - /dev/gpiomem:/dev/gpiomem
-    restart: unless-stopped
+The svxreflector runs on a VPS which has relatively limited resources
+and the build step hits it pretty hard, so I do the build of the image
+on a build machine with 32GB of RAM in it. Then copy the image to the VPS.
+
+```bash
+docker-compose --file=docker-compose.svxreflector.yml build
+docker save -o svxlink.docker svxlink
+scp svxlink.docker tarra.link:
+```
+
+On the VPS, load the copied image into the collection of images.
+
+```bash
+ssh tarra
+docker load -i svxlink.docker
 ```
 
 ## Resources
